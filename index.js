@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./models/user.model");
 const UserRoutes = require("./routes/user.route");
-
+require('dotenv').config();
 const app = express();
 
 //Middleware to allow JSON
@@ -16,7 +16,8 @@ app.use("/user",UserRoutes)
 app.get('/',(req,res)=>res.send("Welcome to this CRUD MEN!"));
 
 //db connection
-mongoose.connect('mongodb+srv://27harsh2001:EvbXdjWLjxeEAtW2@mern-db.0y2kn70.mongodb.net/Crud-MEN-Collection?retryWrites=true&w=majority&appName=MERN-DB')
+const MONGODB_URI = process.env.MONGODB_URI;
+mongoose.connect(MONGODB_URI)
 .then(()=>
     {
         console.log('Connected to mongo db');
